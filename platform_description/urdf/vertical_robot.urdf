@@ -1,0 +1,237 @@
+<?xml version="1.0" ?>
+<robot name="vertical_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <material name="dark">
+    <color rgba="0.3 0.3 0.3 1.0"/>
+  </material>
+  
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.28" rpy="0 0 1.57"/>
+    </visual>
+  </link>
+
+  <joint name="world_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="link_2"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+
+  <link name="link_1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/link1.stl" scale="0.1 0.1 0.1"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+  
+  <joint name="joint_2" type="revolute">
+    <parent link="link_2"/>
+    <child link="link_1"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <limit effort="30" velocity="1.0" lower="0" upper="6.28" />
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="link_2">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/link2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+
+  <joint name="joint_1" type="prismatic">
+    <parent link="link_2"/>
+    <child link="link_3"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <limit effort="30" velocity="1" lower="-0.14" upper="0.14" />
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <link name="link_3">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/link3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+
+  <link name="link3_1">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/magnet.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+
+  <link name="link3_2">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/magnet.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+
+  <link name="link3_3">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/magnet.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+  
+  <link name="link3_4">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/magnet.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+
+  <link name="link1_1">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/magnet.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+
+  <link name="link1_2">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/magnet.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+
+  <link name="link1_3">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/magnet.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+
+  <link name="link1_4">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/magnet.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  		</material>
+    </visual>
+  </link>
+
+  <joint name="joint1_1" type="prismatic">
+    <parent link="link_1"/>
+    <child link="link1_1"/>
+    <origin xyz="0.0 -0.330 -0.08" rpy="0 0 0"/>
+    <limit effort="30" velocity="1" lower="0" upper="0.05" />
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <joint name="joint1_2" type="prismatic">
+    <parent link="link_1"/>
+    <child link="link1_2"/>
+    <origin xyz="0 0.330 -0.08" rpy="0 0 0"/>
+    <limit effort="30" velocity="1" lower="0" upper="0.05" />
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <joint name="joint1_3" type="prismatic">
+    <parent link="link_1"/>
+    <child link="link1_3"/>
+    <origin xyz="-0.330 0 -0.08" rpy="0 0 1.57"/>
+    <limit effort="30" velocity="1" lower="0" upper="0.05" />
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <joint name="joint1_4" type="prismatic">
+    <parent link="link_1"/>
+    <child link="link1_4"/>
+    <origin xyz="0.330 0 -0.08" rpy="0 0 1.57"/>
+    <limit effort="30" velocity="1" lower="0" upper="0.05" />
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+
+  <joint name="joint3_1" type="prismatic">
+    <parent link="link_3"/>
+    <child link="link3_1"/>
+    <origin xyz="0.800 -0.355 -0.08" rpy="0 0 1.57"/>
+    <limit effort="30" velocity="1" lower="0" upper="0.05" />
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <joint name="joint3_2" type="prismatic">
+    <parent link="link_3"/>
+    <child link="link3_2"/>
+    <origin xyz="-0.800 -0.355 -0.08" rpy="0 0 1.57"/>
+    <limit effort="30" velocity="1" lower="0" upper="0.05" />
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <joint name="joint3_3" type="prismatic">
+    <parent link="link_3"/>
+    <child link="link3_3"/>
+    <origin xyz="-0.800 0.355 -0.08" rpy="0 0 1.57"/>
+    <limit effort="30" velocity="1" lower="0" upper="0.05" />
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <joint name="joint3_4" type="prismatic">
+    <parent link="link_3"/>
+    <child link="link3_4"/>
+    <origin xyz="0.800 0.355 -0.08" rpy="0 0 1.57"/>
+    <limit effort="30" velocity="1" lower="0" upper="0.05" />
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+
+</robot>

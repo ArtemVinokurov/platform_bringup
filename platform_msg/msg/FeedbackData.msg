@@ -1,0 +1,6 @@
+bool central_magnets
+bool side_magnets
+bool central_pneumo
+bool side_pneumo
+float64 p_joint_pos
+float64 r_joint_pos
