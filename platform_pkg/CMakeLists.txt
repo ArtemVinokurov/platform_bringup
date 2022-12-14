@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(platform_description)
+project(platform_pkg)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -22,8 +22,15 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(DIRECTORY meshes rviz urdf launch
+install(DIRECTORY meshes rviz urdf launch src config
   DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  PROGRAMS
+  src/base_controller.py
+  src/walk_robot_odom.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 

@@ -8,8 +8,14 @@ from math import *
 
 class PlatformSerialConnection(Node):
     def __init__(self):
-        super().__init__('platform_serial_connection')
-        port = '/dev/ttyACM0'
+        super().__init__('serial_connection')
+
+        self.declare_parameters(namespace='',
+                                parameters=[('device', '/dev/ttyACM0')])
+        
+        
+        port = self.get_param_str('device')
+
         self.serial = SerialServer(port)
         if self.serial is None:
             self.destroy_node()
@@ -23,6 +29,10 @@ class PlatformSerialConnection(Node):
         self.cmd.step = 0.0
         self.steps_on_rev = 800  # число шагов на оборот шагового двигателя
 
+        self.pneumo_state = [False, False]
+
+        self.joint_limits = []
+
         self.d = 0.056 # диаметр шестерни, м
         self.ratio = 24 # передаточное число редуктора
 
@@ -33,10 +43,10 @@ class PlatformSerialConnection(Node):
             self.send_cmd_linear()
 
 
-    # отправка команды на контроллер в виде "p 10000 10000"
+    # отправка команды на контроллер в виде "l 10000 10000"
     def send_cmd_linear(self):
         step_vel, step_pos = self.convert_to_steps(self.cmd.vel, self.cmd.step)
-        cmd_str = "p" + " " + str(step_vel) + " " + str(step_pos)
+        cmd_str = "l" + " " + str(step_vel) + " " + str(step_pos) + "\n"
         print(cmd_str)
         self.serial.send_cmd(cmd_str)
 
@@ -99,6 +109,13 @@ class PlatformSerialConnection(Node):
                 self.pub_feedback.publish(feedback_msg)
         else:
             print('No data')
+
+    def get_param_str(self, name):
+        
+        try:
+            return self.get_parameter(name).get_parameter_value().string_value
+        except:
+            pass
 
 
 def main():

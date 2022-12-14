@@ -26,7 +26,7 @@ class WalkRobotTf(Node):
 
         self.odom_pub = self.create_publisher(Odometry, '/odom', 10)
         
-        self.timer_period = 0.0001
+        self.timer_period = 0.001
         self.timer_broadcast = self.create_timer(self.timer_period, self.update_robot_pose)
 
         self.limit_prismatic_joint = [-0.14, 0.14]

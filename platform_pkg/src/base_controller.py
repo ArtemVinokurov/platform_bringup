@@ -6,6 +6,7 @@ from rclpy.node import Node
 from std_msgs.msg import Bool, String
 from geometry_msgs.msg import Twist, Quaternion, Vector3
 from sensor_msgs.msg import JointState
+from platform_msg.msg import CmdLinear, FeedbackData
 
 
 class BaseController(Node):
@@ -13,7 +14,8 @@ class BaseController(Node):
     def __init__(self):
         rclpy.init()
         super().__init__('base_controller')
-        self.sub_linear = self.create_subscription(Twist, '/cmd_linear', self.cmd_cb, 10)
+        #self.sub_linear = self.create_subscription(Twist, '/cmd_linear', self.cmd_cb, 10)
+        self.sub_linear = self.create_subscription(CmdLinear, '/cmd_linear', self.cmd_cb, 10)
         # self.pub_state = self.create_publisher(StateWalk, '/state_walk', 1)
         self.joint_state_pub = self.create_publisher(JointState, '/platform/joint_states', 10)
         self.walk_state_pub = self.create_publisher(String, '/state_base', 10)
@@ -28,6 +30,7 @@ class BaseController(Node):
         self.cmd_angular_vel = 0
 
         self.limit_prismatic_joint = [-0.14, 0.14]
+        #self.limit_prismatic_joint = [0.0, 0.28]
         self.joint_magnet_limit = [0, 0.05]
 
         self.upper_limit = False
@@ -58,15 +61,20 @@ class BaseController(Node):
         self.joint_states_msg.position.append(self.joint_magnet_limit[1])
 
 
-    def cmd_cb(self, msg):
-        vel = msg.linear.y
-        angular = msg.angular.z
-        
+    def cmd_cb(self, msg=CmdLinear()):
+        #vel = msg.linear.y
+        #angular = msg.angular.z
+        vel = msg.vel
+        step = msg.step
+        angular = 0
         if vel != 0 and angular != 0:
             self.get_logger().info('Cmd velocity error: linear and angular velocity are not equal to zero at the same time')
+        elif step > 0.14:
+            self.get_logger().info('Step larger prismatic joint limit')
         else:
             self.cmd_linear_vel = vel
             self.cmd_angular_vel = angular
+            self.limit_prismatic_joint = [-step, step]
 
     def check_limit_cb(self):
 

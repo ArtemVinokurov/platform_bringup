@@ -1,4 +1,6 @@
 from setuptools import setup
+import os
+from glob import glob
 
 package_name = 'platform_bringup'
 
@@ -10,6 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name), glob('launch/*launch.[pxy][yma]*'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -20,7 +23,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'serial_connection = platform_bringup.serial_connection:main'
+            'serial_connection = platform_bringup.serial_connection:main',
             'publish_joint_state = platform_bringup.publish_joint_state:main'
         ],
     },
