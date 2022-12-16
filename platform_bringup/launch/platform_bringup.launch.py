@@ -101,9 +101,9 @@ def generate_launch_description():
     return LaunchDescription(
         [serial_port_arg,
          use_sim_arg,
-         robot_state_publisher,
-         publish_joint_state_node,
-         platform_robot_odom,
+         #robot_state_publisher,
+         #publish_joint_state_node,
+         #platform_robot_odom,
          serial_connection_node,
          platform_model_launch,
          rviz_node,

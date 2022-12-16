@@ -34,7 +34,7 @@ class PlatformSerialConnection(Node):
         self.joint_limits = []
 
         self.d = 0.056 # диаметр шестерни, м
-        self.ratio = 24 # передаточное число редуктора
+        self.ratio = 20 # передаточное число редуктора
 
      
     def cmd_linear_callback(self, msg=CmdLinear()):
